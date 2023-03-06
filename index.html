@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Library - Seb887</title>
   </head>
-  <body>
+  <body class="p-0 m-0 box-border">
     <header>
       <h1>Library</h1>
     </header>
-    <main>
-      <div class="newBook">
+    <main
+      class="flex justify-center items-center text-center bg-slate-700 h-screen"
+    >
+      <div class="addBookContainer">
         <button class="addBook" id="addBook">Add Book</button>
       </div>
       <div class="libContainer">
@@ -37,5 +40,7 @@
         </div>
       </div>
     </main>
+
+    <script src="app.js"></script>
   </body>
 </html>
