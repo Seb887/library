@@ -5,38 +5,142 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/159db6d9fb.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Library - Seb887</title>
   </head>
-  <body class="p-0 m-0 box-border">
-    <header>
+  <body class="p-0 m-0 box-border bg-[#202124]">
+    <header class="bg-slate-600">
       <h1>Library</h1>
     </header>
-    <main
-      class="flex justify-center items-center text-center bg-slate-700 h-screen"
-    >
-      <div class="addBookContainer">
-        <button class="addBook" id="addBook">Add Book</button>
+    <main class="grid justify-center text-white">
+      <div class="addBookContainer flex justify-center items-center h-60">
+        <button
+          class="h-10 w-48 bg-slate-600 hover:bg-slate-700 border-2 border-orange-900 rounded-xl"
+          id="addBook"
+        >
+          Add Book
+        </button>
       </div>
-      <div class="libContainer">
-        <div class="bookContainer">
-          <p class="bookTitle">"(K)ein Gespür für Zahlen"</p>
-          <p class="bookAuthor">Barbara Oakley</p>
-          <p class="bookPages">250</p>
-          <button class="readButtons" id="readStatus">Read</button>
+      <div
+        class="libContainer grid xl:grid-cols-4 xl:ml-20 xl:mr-20 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 sm:ml-5 sm:mr-5 gap-10"
+      >
+        <div
+          class="bookContainerjustify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <h2 class="bookTitle font-bold text-xl">
+            "(K)ein Gespür für Zahlen"
+          </h2>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
         </div>
 
-        <div class="bookContainer">
-          <p class="bookTitle">"Die Macht Ihres Unterbewusstseins"</p>
-          <p class="bookAuthor">Joseph Murphy</p>
-          <p class="bookPages">350</p>
-          <button class="readButtons" id="readStatus">Read</button>
+        <div
+          class="bookContainerjustify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <h2 class="bookTitle font-bold text-xl">
+            "(K)ein Gespür für Zahlen"
+          </h2>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
         </div>
 
-        <div class="bookContainer">
-          <p class="bookTitle">"Der Millionär und er Mönch"</p>
-          <p class="bookAuthor">Julian Hermsen</p>
-          <p class="bookPages">187</p>
-          <button class="readButtons" id="readStatus">Read</button>
+        <div
+          class="bookContainerjustify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <h2 class="bookTitle font-bold text-xl">
+            "(K)ein Gespür für Zahlen"
+          </h2>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="bookContainerjustify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <h2 class="bookTitle font-bold text-xl">
+            "(K)ein Gespür für Zahlen"
+          </h2>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
         </div>
       </div>
     </main>
