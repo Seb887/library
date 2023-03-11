@@ -9,16 +9,18 @@
       src="https://kit.fontawesome.com/159db6d9fb.js"
       crossorigin="anonymous"
     ></script>
-    <title>Library - Seb887</title>
+    <title>Library</title>
   </head>
-  <body class="p-0 m-0 box-border bg-[#202124]">
-    <header class="bg-slate-600">
-      <h1>Library</h1>
+  <body class="p-0 m-0 box-border bg-slate-900">
+    <header
+      class="bg-slate-800 flex justify-center items-center h-24 border-b border-sky-500"
+    >
+      <h1 class="siteTitle text-5xl text-sky-500">Library</h1>
     </header>
     <main class="grid justify-center text-white">
-      <section class="addBookContainer flex justify-center items-center h-60">
+      <section class="addBookContainer grid justify-center items-center h-60">
         <button
-          class="h-10 w-48 bg-slate-600 hover:bg-slate-700 border-2 border-orange-900 rounded-xl"
+          class="h-10 w-48 bg-slate-700 border-sky-500 border-2 hover:bg-sky-500 hover:border-slate-600 rounded-xl"
           id="addBook"
         >
           Add Book
@@ -26,8 +28,169 @@
       </section>
 
       <section
-        class="libContainer grid xl:grid-cols-4 xl:ml-20 xl:mr-20 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 sm:ml-5 sm:mr-5 gap-10"
-      ></section>
+        class="libContainer hidden xl:grid-cols-4 xl:ml-20 xl:mr-20 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 sm:ml-5 sm:mr-5 gap-10"
+      >
+        <!-- TEST -->
+        <!-- <div
+          class="bookContainer justify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <div class="h-20">
+            <h2 class="bookTitle font-bold text-xl">
+              "Die Macht Ihres Unterbewusstseins"
+            </h2>
+          </div>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="bookContainer justify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <div class="h-20">
+            <h2 class="bookTitle font-bold text-xl">
+              "Die Macht Ihres Unterbewusstseins"
+            </h2>
+          </div>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
+        </div>
+        <div
+          class="bookContainer justify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
+        >
+          <div class="h-20">
+            <h2 class="bookTitle font-bold text-xl">
+              "Die Macht Ihres Unterbewusstseins"
+            </h2>
+          </div>
+          <p class="bookAuthor mt-2">Barbara Oakley</p>
+          <div class="pages flex justify-center space-x-1 mt-2">
+            <p id="bookPages">250</p>
+            <p>Seiten</p>
+          </div>
+          <label class="mt-10 pr-2" for="read">Read?</label>
+          <input
+            type="checkbox"
+            class="readButtons mt-5"
+            id="readStatus"
+            name="read"
+            value="Read"
+          />
+          <div>
+            <button
+              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
+              id="deleteButton"
+            >
+              X
+            </button>
+          </div>
+        </div> -->
+        <!-- - -->
+      </section>
+
+      <!-- New Book Modal -->
+      <section class="flex justify-center">
+        <div
+          class="newBookModal bg-slate-600 h-auto p-5 border border-slate-400 rounded-3xl z-10"
+          id="newBookModal"
+        >
+          <div class="modalHeader flex justify-between mb-8">
+            <div class="text-2xl font-extrabold">New Book</div>
+            <button class="closeModalButton text-2xl inline-block align-top">
+              &times;
+            </button>
+          </div>
+          <form class="form grid" method="get">
+            <label for="name" class="flex justify-start mb-1">Title</label>
+            <input
+              name="name"
+              type="text"
+              autocomplete="name"
+              placeholder=""
+              class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+              required
+            />
+            <label for="name" class="flex justify-start mb-1 mt-5"
+              >Author</label
+            >
+            <input
+              name="name"
+              type="text"
+              autocomplete="name"
+              placeholder=""
+              class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+              required
+            />
+            <label for="name" class="flex justify-start mb-1 mt-5">Pages</label>
+            <input
+              name="name"
+              type="number"
+              autocomplete="name"
+              placeholder=""
+              class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+              required
+            />
+            <div class="mt-5">
+              <label class="mt-10 pr-2" for="read">Read?</label>
+              <input
+                type="checkbox"
+                class="readButtons mt-5 bg-slate-300"
+                id="readStatus"
+                name="read"
+                value="Read"
+              />
+            </div>
+            <div class="submitButton">
+              <button
+                type="submit"
+                class="h-10 w-32 mt-5 bg-slate-700 border-sky-500 border-2 hover:bg-sky-500 hover:border-slate-600 rounded-xl"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="overlay fixed top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50 z-0"
+        ></div>
+      </section>
     </main>
 
     <script src="app.js"></script>

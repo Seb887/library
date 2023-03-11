@@ -21,6 +21,18 @@ let myLibrary = [
     pages: 187,
     read: true,
   },
+  {
+    title: 'Der Millionär und der Mönch',
+    author: 'Julian Hermsen',
+    pages: 187,
+    read: true,
+  },
+  {
+    title: 'Der Millionär und der Mönch',
+    author: 'Julian Hermsen',
+    pages: 187,
+    read: true,
+  },
 ];
 
 // function Book(title, author, pages, read) {
@@ -58,11 +70,12 @@ let myLibrary = [
             </button>
           </div>*/
 
-myLibrary.forEach((e) => generateHTML(e));
+// myLibrary.forEach((e) => generateHTML(e));
 
 function generateHTML(obj) {
   const bookContainer = document.createElement('div');
   const bookTitle = document.createElement('p');
+  const bookTitleContainer = document.createElement('div');
   const bookAuthor = document.createElement('p');
   const bookPages = document.createElement('p');
   const readLabel = document.createElement('label');
@@ -73,14 +86,15 @@ function generateHTML(obj) {
   bookContainer.classList.add(
     'bookContainer',
     'justify-center',
-    'bg-slate-600',
+    'bg-slate-800',
     'text-center',
     'h-auto',
     'p-8',
     'border',
-    'border-slate-400',
+    'border-sky-500',
     'rounded-3xl'
   );
+  bookTitleContainer.classList.add('h-16');
   bookTitle.classList.add('bookTitle', 'font-bold', 'text-xl');
   bookTitle.textContent = `"${obj.title}"`;
   bookAuthor.classList.add('bookAuthor', 'mt-2');
@@ -101,22 +115,23 @@ function generateHTML(obj) {
   readInput.setAttribute('id', 'readStatus');
   readInput.setAttribute('name', 'read');
   readInput.setAttribute('value', 'Read');
-  removeEntry.setAttribute(
+  removeEntry.classList.add(
     'bg-slate-700',
-    'hover:bg-slate-300',
-    'hover:text-slate-900',
+    'hover:bg-sky-500',
+    'hover:text-slate-700',
     'w-10',
     'mt-5',
     'p-2',
     'border',
-    'border-slate-400',
+    'border-slate-600',
     'hover:border-slate-900',
     'rounded-full'
   );
   removeEntry.setAttribute('id', 'deleteButton');
   removeEntry.textContent = 'X';
 
-  bookContainer.appendChild(bookTitle);
+  bookTitleContainer.appendChild(bookTitle);
+  bookContainer.appendChild(bookTitleContainer);
   bookContainer.appendChild(bookAuthor);
   bookContainer.appendChild(bookPages);
   bookContainer.appendChild(readLabel);
