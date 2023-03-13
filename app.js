@@ -1,6 +1,12 @@
 'use strict';
 
+const addBookButton = document.querySelector('#addBook');
+const saveNewBookButton = document.querySelector('#saveNewBookButton');
+const closeModalButton = document.querySelector('.closeModalButton');
+const libSection = document.querySelector('.libSection');
 const libContainer = document.querySelector('.libContainer');
+const newBookModalSection = document.querySelector('.newBookModalSection');
+const deleteButton = document.querySelector('#deleteButton');
 
 let myLibrary = [
   {
@@ -42,35 +48,13 @@ let myLibrary = [
 //     (this.read = read);
 // }
 
-/*<div
-          class="bookContainer justify-center bg-slate-600 text-center h-auto p-8 border border-slate-400 rounded-3xl"
-        >
-          <h2 class="bookTitle font-bold text-xl">
-            "(K)ein Gespür für Zahlen"
-          </h2>
-          <p class="bookAuthor mt-2">Barbara Oakley</p>
-          <div class="pages flex justify-center space-x-1 mt-2">
-            <p id="bookPages">250</p>
-            <p>Seiten</p>
-          </div>
-          <label class="mt-10 pr-2" for="read">Read?</label>
-          <input
-            type="checkbox"
-            class="readButtons mt-5"
-            id="readStatus"
-            name="read"
-            value="Read"
-          />
-          <div>
-            <button
-              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
-              id="deleteButton"
-            >
-              X
-            </button>
-          </div>*/
+myLibrary.forEach((e) => generateHTML(e));
 
-// myLibrary.forEach((e) => generateHTML(e));
+// Button Events
+addBookButton.onclick = () => openModal();
+saveNewBookButton.onclick = () => closeModal();
+closeModalButton.onclick = () => closeModal();
+deleteButton.oncklick = () => console.log('Delete gedrückt');
 
 function generateHTML(obj) {
   const bookContainer = document.createElement('div');
@@ -78,15 +62,16 @@ function generateHTML(obj) {
   const bookTitleContainer = document.createElement('div');
   const bookAuthor = document.createElement('p');
   const bookPages = document.createElement('p');
-  const readLabel = document.createElement('label');
-  const readInput = document.createElement('input');
+  const readStatus = document.createElement('p');
+  // const readInput = document.createElement('input');
   const removeContainer = document.createElement('div');
   const removeEntry = document.createElement('button');
+  const removeIcon = document.createElement('i');
 
   bookContainer.classList.add(
     'bookContainer',
     'justify-center',
-    'bg-slate-800',
+    'bg-slate-700',
     'text-center',
     'h-auto',
     'p-8',
@@ -97,24 +82,32 @@ function generateHTML(obj) {
   bookTitleContainer.classList.add('h-16');
   bookTitle.classList.add('bookTitle', 'font-bold', 'text-xl');
   bookTitle.textContent = `"${obj.title}"`;
-  bookAuthor.classList.add('bookAuthor', 'mt-2');
+  bookAuthor.classList.add('bookAuthor', 'mt-2', 'italic', 'text-lg');
   bookAuthor.textContent = obj.author;
   bookPages.classList.add(
     'bookPages',
     'flex',
     'justify-center',
     'space-x-1',
-    'mt-2'
+    'mt-2',
+    'text-slate-400'
   );
-  bookPages.textContent = obj.pages;
-  readLabel.classList.add('mt-10', 'pr-2');
-  readInput.classList.add('readButtons', 'mt-5');
-  readLabel.setAttribute('for', 'read');
-  readLabel.textContent = 'Read?';
-  readInput.setAttribute('type', 'checkbox');
-  readInput.setAttribute('id', 'readStatus');
-  readInput.setAttribute('name', 'read');
-  readInput.setAttribute('value', 'Read');
+  bookPages.textContent = `- ${obj.pages} Seiten -`;
+  readStatus.classList.add('mt-10', 'pr-2');
+  // readInput.classList.add('readButtons', 'mt-5');
+  // readStatus.setAttribute('for', 'read');
+  if (obj.read === true) {
+    readStatus.textContent = '#gelesen';
+    readStatus.classList.add('text-green-500');
+  } else {
+    readStatus.textContent = '#ungelesen';
+    readStatus.classList.add('text-red-500');
+  }
+
+  // readInput.setAttribute('type', 'checkbox');
+  // readInput.setAttribute('id', 'readStatus');
+  // readInput.setAttribute('name', 'read');
+  // readInput.setAttribute('value', 'Read');
   removeEntry.classList.add(
     'bg-slate-700',
     'hover:bg-sky-500',
@@ -122,32 +115,51 @@ function generateHTML(obj) {
     'w-10',
     'mt-5',
     'p-2',
-    'border',
-    'border-slate-600',
+    // 'border',
+    // 'border-slate-600',
     'hover:border-slate-900',
     'rounded-full'
   );
   removeEntry.setAttribute('id', 'deleteButton');
-  removeEntry.textContent = 'X';
+  // removeEntry.textContent = 'X';
+  removeIcon.classList.add('fa-solid', 'fa-trash');
 
   bookTitleContainer.appendChild(bookTitle);
   bookContainer.appendChild(bookTitleContainer);
   bookContainer.appendChild(bookAuthor);
   bookContainer.appendChild(bookPages);
-  bookContainer.appendChild(readLabel);
-  bookContainer.appendChild(readInput);
+  bookContainer.appendChild(readStatus);
+  // bookContainer.appendChild(readInput);
+  removeEntry.appendChild(removeIcon);
   removeContainer.appendChild(removeEntry);
   bookContainer.appendChild(removeContainer);
   libContainer.appendChild(bookContainer);
 }
 
-/* <button
-              class="bg-slate-700 hover:bg-slate-300 hover:text-slate-900 w-10 mt-5 p-2 border border-slate-400 hover:border-slate-900 rounded-full"
-              id="deleteButton"
-            >
-              X
-            </button>*/
+function addBookToLibrary() {}
 
-function addBookToLibrary() {
-  // do stuff here
+function changeReadStatus() {}
+
+function deleteBook(e) {
+  console.log(e.target);
+}
+
+function openModal() {
+  // libSection.classList.add('hidden');
+  newBookModalSection.classList.remove('hidden');
+}
+
+function closeModal() {
+  libSection.classList.remove('hidden');
+  newBookModalSection.classList.add('hidden');
+}
+
+function Book(title, author, pages, readStatus) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.readStatus = readStatus;
+  this.newBook = this.setPerson = function () {
+    myLibrary.push({ title });
+  };
 }
