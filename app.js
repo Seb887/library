@@ -5,56 +5,55 @@ const saveNewBookButton = document.querySelector('#saveNewBookButton');
 const closeModalButton = document.querySelector('.closeModalButton');
 const libSection = document.querySelector('.libSection');
 const libContainer = document.querySelector('.libContainer');
+const allBookContainer = document.querySelectorAll('.bookContainer');
 const newBookModalSection = document.querySelector('.newBookModalSection');
 const deleteButton = document.querySelector('#deleteButton');
+
+const inputTitle = document.querySelector('#inputTitle');
+const inputAuthor = document.querySelector('#inputAuthor');
+const inputPages = document.querySelector('#inputPages');
+// const inputReadStatus = document.querySelector('#inputReadStatus');
 
 let myLibrary = [
   {
     title: 'Kein Gespür für Zahlen',
     author: 'Barbara Oakley',
     pages: 222,
-    read: false,
+    readStatus: false,
   },
   {
     title: 'Die Macht Ihres Unterbewusstseins',
     author: 'Joseph Murphy',
     pages: 352,
-    read: false,
+    readStatus: false,
   },
   {
     title: 'Der Millionär und der Mönch',
     author: 'Julian Hermsen',
     pages: 187,
-    read: true,
+    readStatus: true,
   },
   {
     title: 'Der Millionär und der Mönch',
     author: 'Julian Hermsen',
     pages: 187,
-    read: true,
+    readStatus: true,
   },
   {
     title: 'Der Millionär und der Mönch',
     author: 'Julian Hermsen',
     pages: 187,
-    read: true,
+    readStatus: true,
   },
 ];
 
-// function Book(title, author, pages, read) {
-//   (this.title = title),
-//     (this.author = author),
-//     (this.pages = pages),
-//     (this.read = read);
-// }
-
-myLibrary.forEach((e) => generateHTML(e));
+// myLibrary.push({ titel: 'titel', author: 'author', pages: 500 }); // Test push array
 
 // Button Events
 addBookButton.onclick = () => openModal();
-saveNewBookButton.onclick = () => closeModal();
+saveNewBookButton.onclick = () => getInput();
 closeModalButton.onclick = () => closeModal();
-deleteButton.oncklick = () => console.log('Delete gedrückt');
+// deleteButton.oncklick = () => console.log('Delete gedrückt');
 
 function generateHTML(obj) {
   const bookContainer = document.createElement('div');
@@ -92,15 +91,15 @@ function generateHTML(obj) {
     'mt-2',
     'text-slate-400'
   );
-  bookPages.textContent = `- ${obj.pages} Seiten -`;
+  bookPages.textContent = `- ${obj.pages} pages -`;
   readStatus.classList.add('mt-10', 'pr-2');
   // readInput.classList.add('readButtons', 'mt-5');
   // readStatus.setAttribute('for', 'read');
-  if (obj.read === true) {
-    readStatus.textContent = '#gelesen';
+  if (obj.readStatus === true) {
+    readStatus.textContent = '#read';
     readStatus.classList.add('text-green-500');
   } else {
-    readStatus.textContent = '#ungelesen';
+    readStatus.textContent = '#unread';
     readStatus.classList.add('text-red-500');
   }
 
@@ -136,30 +135,66 @@ function generateHTML(obj) {
   libContainer.appendChild(bookContainer);
 }
 
-function addBookToLibrary() {}
+// function addBookToLibrary() {}
 
-function changeReadStatus() {}
+// function changeReadStatus() {}
 
-function deleteBook(e) {
-  console.log(e.target);
+// function deleteBook(e) {
+//   console.log(e.target);
+// }
+
+function refresh() {
+  // Delete bookContainer
+  while (libContainer.firstChild) {
+    libContainer.removeChild(libContainer.firstChild);
+  }
+  // Generate HTML
+  myLibrary.forEach((e) => generateHTML(e));
 }
 
 function openModal() {
-  // libSection.classList.add('hidden');
   newBookModalSection.classList.remove('hidden');
 }
 
 function closeModal() {
-  libSection.classList.remove('hidden');
   newBookModalSection.classList.add('hidden');
 }
 
-function Book(title, author, pages, readStatus) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
-  this.newBook = this.setPerson = function () {
-    myLibrary.push({ title });
-  };
+function clearInputModal() {
+  inputTitle.value = '';
+  inputAuthor.value = '';
+  inputPages.value = '';
 }
+
+class Book {
+  constructor(title = 'Unknown', author = 'Unknown', pages = 0) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+  }
+
+  inputToArray() {
+    let newBookObj = {
+      title: this.title,
+      author: this.author,
+      pages: this.pages,
+    };
+    // console.log(newBookObj);
+    myLibrary.push(newBookObj);
+  }
+}
+
+function getInput() {
+  const newBook = new Book(
+    inputTitle.value,
+    inputAuthor.value,
+    inputPages.value
+  );
+  newBook.inputToArray();
+  clearInputModal();
+  refresh();
+  closeModal();
+  console.log(myLibrary);
+}
+
+window.onload = () => refresh();

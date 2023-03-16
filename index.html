@@ -19,20 +19,20 @@
       <h1 class="siteTitle font-extrabold text-5xl text-sky-500">Library</h1>
     </header>
     <main class="grid justify-center text-white relative top-20">
-      <section class="addBookSection">
-        <div class="addBookContainer grid justify-center items-center h-60">
-          <button
-            class="h-auto w-auto p-5 hover:scale-105 bg-slate-700 border-sky-500 border-4 hover:bg-sky-500 hover:border-slate-600 rounded-xl text-3xl font-bold text-sky-500 hover:text-slate-600"
-            id="addBook"
-          >
-            Buch hinzufügen
-          </button>
-        </div>
-      </section>
+      <section class="addBookSection"></section>
+
+      <div class="addBookContainer grid justify-center items-center h-60">
+        <button
+          class="w-auto h-auto p-3 hover:scale-105 bg-slate-700 border-sky-500 border-4 hover:bg-sky-500 hover:border-slate-600 rounded-xl text-3xl font-bold text-sky-500 hover:text-slate-600"
+          id="addBook"
+        >
+          Add Book
+        </button>
+      </div>
 
       <section class="libSection">
         <div
-          class="libContainer grid xl:grid-cols-4 xl:ml-20 xl:mr-20 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 sm:ml-10 sm:mr-10 sm:mb-52 gap-10"
+          class="libContainer grid xl:grid-cols-4 xl:m-20 xl:mt-0 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 sm:m-10 sm:mt-0 gap-10"
         ></div>
       </section>
 
@@ -56,8 +56,8 @@
               <input
                 name="name"
                 type="text"
-                autocomplete="name"
                 class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+                id="inputTitle"
                 required
               />
               <label for="name" class="flex justify-start mb-1 mt-5"
@@ -66,8 +66,8 @@
               <input
                 name="name"
                 type="text"
-                autocomplete="name"
                 class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+                id="inputAuthor"
                 required
               />
               <label for="name" class="flex justify-start mb-1 mt-5"
@@ -76,8 +76,8 @@
               <input
                 name="name"
                 type="number"
-                autocomplete="name"
                 class="pl-1 bg-slate-300 text-slate-900 rounded-sm"
+                id="inputPages"
                 required
               />
               <div class="mt-5">
@@ -90,9 +90,9 @@
                   value="Read"
                 />
               </div>
-              <div class="submitButton">
+              <div>
                 <button
-                  type="submit"
+                  type="button"
                   class="h-10 w-32 mt-5 bg-slate-700 border-sky-500 border-2 hover:bg-sky-500 hover:border-slate-600 rounded-xl"
                   id="saveNewBookButton"
                 >
