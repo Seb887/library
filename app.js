@@ -1,200 +1,29 @@
 'use strict';
-
-const addBookButton = document.querySelector('#addBook');
-const saveNewBookButton = document.querySelector('#saveNewBookButton');
-const closeModalButton = document.querySelector('.closeModalButton');
-const libSection = document.querySelector('.libSection');
-const libContainer = document.querySelector('.libContainer');
-const allBookContainer = document.querySelectorAll('.bookContainer');
-const newBookModalSection = document.querySelector('.newBookModalSection');
-const deleteButton = document.querySelector('#deleteButton');
-
-const inputTitle = document.querySelector('#inputTitle');
-const inputAuthor = document.querySelector('#inputAuthor');
-const inputPages = document.querySelector('#inputPages');
-// const inputReadStatus = document.querySelector('#inputReadStatus');
-
-let myLibrary = [
-  {
-    title: 'Kein Gespür für Zahlen',
-    author: 'Barbara Oakley',
-    pages: 222,
-    readStatus: false,
-  },
-  {
-    title: 'Die Macht Ihres Unterbewusstseins',
-    author: 'Joseph Murphy',
-    pages: 352,
-    readStatus: false,
-  },
-  {
-    title: 'Der Millionär und der Mönch',
-    author: 'Julian Hermsen',
-    pages: 187,
-    readStatus: true,
-  },
-  {
-    title: 'Der Millionär und der Mönch',
-    author: 'Julian Hermsen',
-    pages: 187,
-    readStatus: true,
-  },
-  {
-    title: 'Der Millionär und der Mönch',
-    author: 'Julian Hermsen',
-    pages: 187,
-    readStatus: true,
-  },
-];
-
-// myLibrary.push({ titel: 'titel', author: 'author', pages: 500 }); // Test push array
-
-// Button Events
-addBookButton.onclick = () => openModal();
-saveNewBookButton.onclick = () => getInput();
-closeModalButton.onclick = () => closeModal();
-// deleteButton.oncklick = () => console.log('Delete gedrückt');
-
-function generateHTML(obj) {
-  const bookContainer = document.createElement('div');
-  const bookTitle = document.createElement('p');
-  const bookTitleContainer = document.createElement('div');
-  const bookAuthor = document.createElement('p');
-  const bookPages = document.createElement('p');
-  const readStatus = document.createElement('p');
-  // const readInput = document.createElement('input');
-  const removeContainer = document.createElement('div');
-  const removeEntry = document.createElement('button');
-  const removeIcon = document.createElement('i');
-
-  bookContainer.classList.add(
-    'bookContainer',
-    'justify-center',
-    'bg-slate-700',
-    'text-center',
-    'h-auto',
-    'p-8',
-    'border',
-    'border-sky-500',
-    'rounded-3xl'
-  );
-  bookTitleContainer.classList.add('h-16');
-  bookTitle.classList.add('bookTitle', 'font-bold', 'text-xl');
-  bookTitle.textContent = `"${obj.title}"`;
-  bookAuthor.classList.add('bookAuthor', 'mt-2', 'italic', 'text-lg');
-  bookAuthor.textContent = obj.author;
-  bookPages.classList.add(
-    'bookPages',
-    'flex',
-    'justify-center',
-    'space-x-1',
-    'mt-2',
-    'text-slate-400'
-  );
-  bookPages.textContent = `- ${obj.pages} pages -`;
-  readStatus.classList.add('mt-10', 'pr-2');
-  // readInput.classList.add('readButtons', 'mt-5');
-  // readStatus.setAttribute('for', 'read');
-  if (obj.readStatus === true) {
-    readStatus.textContent = '#read';
-    readStatus.classList.add('text-green-500');
-  } else {
-    readStatus.textContent = '#unread';
-    readStatus.classList.add('text-red-500');
-  }
-
-  // readInput.setAttribute('type', 'checkbox');
-  // readInput.setAttribute('id', 'readStatus');
-  // readInput.setAttribute('name', 'read');
-  // readInput.setAttribute('value', 'Read');
-  removeEntry.classList.add(
-    'bg-slate-700',
-    'hover:bg-sky-500',
-    'hover:text-slate-700',
-    'w-10',
-    'mt-5',
-    'p-2',
-    // 'border',
-    // 'border-slate-600',
-    'hover:border-slate-900',
-    'rounded-full'
-  );
-  removeEntry.setAttribute('id', 'deleteButton');
-  // removeEntry.textContent = 'X';
-  removeIcon.classList.add('fa-solid', 'fa-trash');
-
-  bookTitleContainer.appendChild(bookTitle);
-  bookContainer.appendChild(bookTitleContainer);
-  bookContainer.appendChild(bookAuthor);
-  bookContainer.appendChild(bookPages);
-  bookContainer.appendChild(readStatus);
-  // bookContainer.appendChild(readInput);
-  removeEntry.appendChild(removeIcon);
-  removeContainer.appendChild(removeEntry);
-  bookContainer.appendChild(removeContainer);
-  libContainer.appendChild(bookContainer);
-}
-
-// function addBookToLibrary() {}
-
-// function changeReadStatus() {}
-
-// function deleteBook(e) {
-//   console.log(e.target);
-// }
-
-function refresh() {
-  // Delete bookContainer
-  while (libContainer.firstChild) {
-    libContainer.removeChild(libContainer.firstChild);
-  }
-  // Generate HTML
-  myLibrary.forEach((e) => generateHTML(e));
-}
-
-function openModal() {
-  newBookModalSection.classList.remove('hidden');
-}
-
-function closeModal() {
-  newBookModalSection.classList.add('hidden');
-}
-
-function clearInputModal() {
-  inputTitle.value = '';
-  inputAuthor.value = '';
-  inputPages.value = '';
-}
-
 class Book {
-  constructor(title = 'Unknown', author = 'Unknown', pages = 0) {
+  constructor(title = 'Unknown', author = 'Unknown', pages = 0, read = false) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-  }
-
-  inputToArray() {
-    let newBookObj = {
-      title: this.title,
-      author: this.author,
-      pages: this.pages,
-    };
-    // console.log(newBookObj);
-    myLibrary.push(newBookObj);
+    this.read = read;
   }
 }
 
-function getInput() {
-  const newBook = new Book(
-    inputTitle.value,
-    inputAuthor.value,
-    inputPages.value
-  );
-  newBook.inputToArray();
-  clearInputModal();
-  refresh();
-  closeModal();
-  console.log(myLibrary);
+class Library {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook() {
+    for (const book of library.books) {
+      this.books.push(book);
+    }
+  }
+
+  editBook() {}
+
+  removeBook() {}
+
+  setRead() {}
 }
 
-window.onload = () => refresh();
+const library = new Library();
