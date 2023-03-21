@@ -25,7 +25,19 @@ class Library {
 
   editBook() {}
 
-  removeBook() {}
+  removeBook(title) {
+    let startIndex;
+    for (let i = 0; i < this.books.length; i++) {
+      if (this.books[i].title === title) {
+        // console.log('bookTitle:', this.books[i].title);
+        startIndex = i;
+      }
+    }
+
+    this.books.splice(startIndex, 1);
+
+    refreshBookGrid();
+  }
 
   setRead() {}
 }
@@ -36,6 +48,8 @@ const library = new Library();
 const addNewBookButton = document.querySelector('#addBook');
 const saveInputButton = document.querySelector('#saveNewBookButton');
 const closeModalButton = document.querySelector('.closeModalButton');
+const editBookButton = document.querySelectorAll('.editButton');
+const removeBookButton = document.querySelector('.deleteButton');
 
 const libContainer = document.querySelector('.libContainer');
 const newBookModal = document.querySelector('.newBookModalSection');
@@ -76,11 +90,19 @@ const addNewBook = () => {
   library.addBook(newBook);
   closeModal();
   clearInputs();
+  refreshBookGrid();
+};
+
+const refreshBookGrid = () => {
   clearBookCards();
   for (const book of library.books) {
     createBookCard(book);
   }
 };
+
+// for (let i = 0; i < removeBookButton.length; i++) {
+//   console.log(removeBookButton[i]);
+// }
 
 const createBookCard = (obj) => {
   const bookContainer = document.createElement('div');
@@ -108,7 +130,7 @@ const createBookCard = (obj) => {
   );
   bookTitleContainer.classList.add('h-16');
   bookTitle.classList.add('bookTitle', 'font-bold', 'text-xl');
-  bookTitle.textContent = `"${obj.title}"`;
+  bookTitle.textContent = `${obj.title}`;
   bookAuthor.classList.add('bookAuthor', 'mt-2', 'italic', 'text-lg');
   bookAuthor.textContent = obj.author;
   bookPages.classList.add(
@@ -130,6 +152,7 @@ const createBookCard = (obj) => {
       'hover:border-green-500',
       'hover:bg-green-500'
     );
+
     removeBook.classList.add(
       'border-green-500',
       'hover:border-green-500',
@@ -153,29 +176,24 @@ const createBookCard = (obj) => {
   editBook.classList.add(
     'editButton',
     'bg-slate-500',
-    // 'hover:bg-sky-500',
     'hover:text-slate-700',
     'w-10',
     'mt-5',
     'mr-2',
     'p-2',
     'border',
-    // 'hover:border-slate-500',
     'rounded-xl'
   );
   editIcon.classList.add('fa-solid', 'fa-pen');
   removeBook.classList.add(
     'deleteButton',
     'bg-slate-500',
-    // 'hover:bg-sky-500',
     'hover:text-slate-700',
     'w-10',
     'mt-5',
     'ml-2',
     'p-2',
     'border',
-    // 'border-sky-500',
-    // 'hover:border-slate-500',
     'rounded-xl'
   );
   removeIcon.classList.add('fa-solid', 'fa-trash');
@@ -191,6 +209,8 @@ const createBookCard = (obj) => {
   buttons.appendChild(removeBook);
   bookContainer.appendChild(buttons);
   libContainer.appendChild(bookContainer);
+
+  removeBookCard(bookContainer);
 };
 
 const clearBookCards = () => {
@@ -202,4 +222,13 @@ const clearBookCards = () => {
 const cancelInput = () => {
   clearInputs();
   closeModal();
+};
+
+const removeBookCard = (element) => {
+  element.querySelector('.deleteButton').addEventListener('click', (e) => {
+    let title =
+      e.target.parentNode.parentNode.firstChild.firstChild.textContent;
+    // console.log('title:', title);
+    library.removeBook(title);
+  });
 };
