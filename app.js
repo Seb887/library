@@ -1,6 +1,6 @@
 'use strict';
 class Book {
-  constructor(title = 'Unknown', author = 'Unknown', pages = 0, read = false) {
+  constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -10,27 +10,57 @@ class Book {
 
 class Library {
   constructor() {
-    this.books = [];
+    this.books = [
+      {
+        title: 'Test',
+        author: 'Test',
+        pages: '111',
+        read: false,
+      },
+      {
+        title: 'Test2',
+        author: 'Test2',
+        pages: '222',
+        read: false,
+      },
+      {
+        title: 'Test3',
+        author: 'Test3  ',
+        pages: '333',
+        read: false,
+      },
+      {
+        title: 'Test4',
+        author: 'Test4',
+        pages: '444',
+        read: false,
+      },
+      {
+        title: 'Test5',
+        author: 'Test5',
+        pages: '555',
+        read: false,
+      },
+      {
+        title: 'Test6',
+        author: 'Test6  ',
+        pages: '666',
+        read: false,
+      },
+    ];
   }
 
   addBook(newBook) {
-    // for (const book of this.books) {
-    //   if (book.title === newBook.title) {
-    //     inputTitle.value = 'book already available';
-    //     inputTitle.setAttribute('color', 'red');
-    //   }
-    // }
     this.books.push(newBook);
+    console.log('after addBook', this.books);
   }
-
-  editBook() {}
 
   removeBook(title) {
     let startIndex;
     for (let i = 0; i < this.books.length; i++) {
       if (this.books[i].title === title) {
-        // console.log('bookTitle:', this.books[i].title);
         startIndex = i;
+        // console.log('startIndex: ', startIndex);
       }
     }
 
@@ -39,7 +69,18 @@ class Library {
     refreshBookGrid();
   }
 
-  setRead() {}
+  setRead(title) {
+    for (let i = 0; i < this.books.length; i++) {
+      if (this.books[i].title === title) {
+        if (this.books[i].read === false) {
+          this.books[i].read = true;
+        } else {
+          this.books[i].read = false;
+        }
+        // console.log('startIndex: ', startIndex);
+      }
+    }
+  }
 }
 
 const library = new Library();
@@ -105,7 +146,7 @@ const refreshBookGrid = () => {
 // }
 
 const createBookCard = (obj) => {
-  const bookContainer = document.createElement('div');
+  const bookCard = document.createElement('div');
   const bookTitle = document.createElement('p');
   const bookTitleContainer = document.createElement('div');
   const bookAuthor = document.createElement('p');
@@ -117,8 +158,8 @@ const createBookCard = (obj) => {
   const removeBook = document.createElement('button');
   const removeIcon = document.createElement('i');
 
-  bookContainer.classList.add(
-    'bookContainer',
+  bookCard.classList.add(
+    'bookCard',
     'justify-center',
     'bg-slate-700',
     'text-center',
@@ -126,7 +167,8 @@ const createBookCard = (obj) => {
     'p-8',
     'border',
     // 'border-sky-500',
-    'rounded-3xl'
+    'rounded-3xl',
+    'w-64'
   );
   bookTitleContainer.classList.add('h-16');
   bookTitle.classList.add('bookTitle', 'font-bold', 'text-xl');
@@ -145,8 +187,12 @@ const createBookCard = (obj) => {
   readStatus.classList.add('readStatus', 'mt-10', 'pr-2');
   if (obj.read === true) {
     readStatus.textContent = '#read';
-    readStatus.classList.add('text-green-500', 'border-green-500');
-    bookContainer.classList.add('border-green-500');
+    readStatus.classList.add(
+      'readStatus',
+      'text-green-500',
+      'border-green-500'
+    );
+    bookCard.classList.add('border-green-500');
     editBook.classList.add(
       'border-green-500',
       'hover:border-green-500',
@@ -160,8 +206,8 @@ const createBookCard = (obj) => {
     );
   } else {
     readStatus.textContent = '#unread';
-    readStatus.classList.add('text-red-500');
-    bookContainer.classList.add('border-red-500');
+    readStatus.classList.add('readStatus', 'text-red-500', 'border-red-500');
+    bookCard.classList.add('border-red-500');
     editBook.classList.add(
       'border-red-500',
       'hover:border-red-500',
@@ -199,18 +245,19 @@ const createBookCard = (obj) => {
   removeIcon.classList.add('fa-solid', 'fa-trash');
 
   bookTitleContainer.appendChild(bookTitle);
-  bookContainer.appendChild(bookTitleContainer);
-  bookContainer.appendChild(bookAuthor);
-  bookContainer.appendChild(bookPages);
-  bookContainer.appendChild(readStatus);
-  editBook.appendChild(editIcon);
+  bookCard.appendChild(bookTitleContainer);
+  bookCard.appendChild(bookAuthor);
+  bookCard.appendChild(bookPages);
+  bookCard.appendChild(readStatus);
+  // editBook.appendChild(editIcon);
   removeBook.appendChild(removeIcon);
-  buttons.appendChild(editBook);
+  // buttons.appendChild(editBook);
   buttons.appendChild(removeBook);
-  bookContainer.appendChild(buttons);
-  libContainer.appendChild(bookContainer);
+  bookCard.appendChild(buttons);
+  libContainer.appendChild(bookCard);
 
-  removeBookCard(bookContainer);
+  removeBookCard(bookCard);
+  changeReadStatus(bookCard);
 };
 
 const clearBookCards = () => {
@@ -228,7 +275,16 @@ const removeBookCard = (element) => {
   element.querySelector('.deleteButton').addEventListener('click', (e) => {
     let title =
       e.target.parentNode.parentNode.firstChild.firstChild.textContent;
-    // console.log('title:', title);
     library.removeBook(title);
   });
 };
+
+const changeReadStatus = (element) => {
+  element.querySelector('.readStatus').addEventListener('click', (e) => {
+    let title =
+      e.target.parentNode.parentNode.firstChild.firstChild.textContent;
+    library.setRead(title);
+  });
+};
+
+window.onload = () => refreshBookGrid();
