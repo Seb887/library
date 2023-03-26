@@ -80,10 +80,17 @@ class Library {
         // console.log('startIndex: ', startIndex);
       }
     }
+
+    refreshBookGrid();
   }
 }
 
 const library = new Library();
+
+// TEST
+// console.log(library.books[1]);
+// library.books[1].read = true;
+// console.log(library.books[1]);
 
 // Get DOM Elements
 const addNewBookButton = document.querySelector('#addBook');
@@ -281,8 +288,7 @@ const removeBookCard = (element) => {
 
 const changeReadStatus = (element) => {
   element.querySelector('.readStatus').addEventListener('click', (e) => {
-    let title =
-      e.target.parentNode.parentNode.firstChild.firstChild.textContent;
+    let title = e.target.parentNode.firstChild.firstChild.textContent;
     library.setRead(title);
   });
 };
